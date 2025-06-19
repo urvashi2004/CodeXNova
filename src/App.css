@@ -1,38 +1,405 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+html,
+body,
+#root {
+  width: 100vw;
+  height: 100vh;
   min-height: 100vh;
+  max-width: 100vw;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+/* General layout */
+.main-bg {
+  min-height: 100vh;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
+  transition: background 3s ease-in, opacity 1s ease-in;
+}
+.fade-out {
+  opacity: 0;
+  transition: opacity 1s ease-in;
+}
+.header {
+  display: flex;
   align-items: center;
+  justify-content: space-between;
+  padding: 24px 40px 16px 40px;
+  background: transparent;
+  position: relative;
+}
+.logo {
+  height: 5vh;
+}
+.hamburger {
+  display: none;
+  flex-direction: column;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  z-index: 20;
+  margin-left: auto;
 }
-
-.App-link {
-  color: #61dafb;
+.hamburger span {
+  height: 4px;
+  width: 100%;
+  background: #fff;
+  margin: 4px 0;
+  border-radius: 2px;
+  transition: 0.3s;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.navbar {
+  display: flex;
+  gap: 32px;
+}
+.navbar a {
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: 600;
+  font-family: Poppins, sans-serif;
+  font-size: 1.1rem;
+  padding: 6px 12px;
+  border-radius: 6px;
+  transition: background 0.2s;
+  align-content: end;
+}
+.order-btn {
+  border: 2px solid #fff;
+  color: #ffffff;
+  background: transparent;
+  padding: 10px 24px;
+  border-radius: 5px;
+  font-family: Poppins, sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+.order-btn:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+.content {
+  flex: 1 1 auto;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  align-items: flex-start;
+  justify-content: space-evenly;
+  padding: 40px 60px;
+}
+.icecream-options {
+  display: flex;
+  flex-direction: row;
+  gap: 7vw;
+  width: 100%;
+  justify-content: left;
+  align-items: flex-end;
+  margin-top: 20px;
+  margin-bottom: 0;
+}
+.icecream-box {
+  position: relative;
+  width: 5vw; /* 50% of image width (image is 10vw) */
+  min-width: 35px;
+  max-width: 65px;
+  height: 10vw;
+  min-height: 45px;
+  max-height: 70px;
+  border: 2.5px solid #fff;
+  border-radius: 2vw;
+  background: none;
+  overflow: visible; /* allow image to overflow */
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  z-index: 1;
+}
+.box-border-full {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 2.5px solid #fff;
+  border-radius: 2vw;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+.box-border-bottom {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 0;
+  border-bottom: 2.5px solid #fff;
+  border-radius: 0 0 2vw 2vw;
+  width: 100%;
+  z-index: 3;
+  pointer-events: none;
+}
+.ice-img-wrap {
+  position: absolute;
+  left: 30%;
+  top: -7.4vw;
+  width: 8vw;
+  min-width: 70px;
+  max-width: 130px;
+  height: 34vw;
+  min-height: 120px;
+  max-height: 240px;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 2;
+  transition: transform 0.4s ease-in, mask-image 0.4s ease-in,
+    -webkit-mask-image 0.4s ease-in;
+  /* Only hide the part of the image under the box using a mask */
+  mask-image: linear-gradient(
+    to top,
+    transparent 0,
+    transparent 35%,
+    black 35%,
+    black 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to top,
+    transparent 0,
+    transparent 35%,
+    black 35%,
+    black 100%
+  );
+}
+.icecream-box:hover .ice-img-wrap {
+  transform: scale(1.12) rotate(12deg) translateX(-45%);
+  mask-image: linear-gradient(
+    -10deg,
+    transparent 0,
+    transparent 35%,
+    black 35%,
+    black 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    -10deg,
+    transparent 0,
+    transparent 34%,
+    black 34%,
+    black 100%
+  );
+  transition: transform 0.4s ease-in, mask-image 0.4s ease-in,
+    -webkit-mask-image 0.4s ease-in;
+}
+.ice-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  z-index: 2;
+  transition: transform 0.4s ease-in;
+}
+.big-cone-wrap {
+  overflow: visible;
+  max-height: 100vh;
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  min-width: 180px;
+  position: absolute;
+  left: 60%;
+  top: 10%;
+  align-self: flex-end;
+}
+.big-cone {
+  max-height: 90vh;
+  height: auto;
+  width: 60vw;
+  min-width: 120px;
+  max-width: 600px;
+  object-fit: contain;
+  position: static;
+}
+.icecream-texts {
+  position: relative;
+  width: 100%;
+  left: 0;
+  top: 0;
+  margin-bottom: 32px;
+  align-items: center;
+}
+.icecream-title {
+  font-family: "Pacifico", cursive !important;
+  font-size: clamp(40px, 12vw, 100px);
+  width: clamp(220px, 70vw, 540px);
+  height: auto;
+  text-align: left;
+  color: #fff !important;
+}
+.icecream-flavor,
+.icecream-desc {
+  font-family: "Poppins", sans-serif !important;
+  font-size: clamp(24px, 4vw, 66px);
+  width: clamp(180px, 60vw, 570px);
+  height: auto;
+  text-align: left;
+  color: #fff !important;
+}
+.icecream-desc {
+  font-size: clamp(14px, 2vw, 16px);
+  width: clamp(220px, 80vw, 796px);
+  height: auto;
+  text-align: left;
+  padding-top: 8px;
+  color: #fff !important;
+}
+@media (max-width: 900px) {
+  .content {
+    flex-direction: column;
+    align-items: center;
+    padding: 24px 10px;
   }
-  to {
-    transform: rotate(360deg);
+  .icecream-texts,
+  .icecream-options {
+    width: 100%;
+    left: 0;
+    align-items: center;
   }
+  .big-cone {
+    width: 90vw;
+    min-width: 120px;
+    max-width: 400px;
+  }
+}
+@media (max-width: 900px) {
+  .navbar {
+    display: none;
+  }
+  .navbar.open {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 72px;
+    left: 0;
+    width: 100vw;
+    background: #fff;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 0;
+    min-width: unset;
+    z-index: 100;
+    gap: 0;
+    align-items: flex-start;
+  }
+  .navbar.open a,
+  .navbar.open .order-btn {
+    color: #222;
+    padding: 18px 32px;
+    font-size: 1.2rem;
+    border-radius: 0;
+    text-align: left;
+    display: block;
+    margin: 0;
+    background: none;
+    border: none;
+    box-shadow: none;
+    width: 100%;
+  }
+  .order-btn {
+    border: none;
+    color: #222;
+    background: none;
+    font-weight: 700;
+    font-size: 1.2rem;
+    padding: 18px 32px;
+    border-radius: 0;
+    margin: 0;
+    box-shadow: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+  }
+  .hamburger {
+    display: flex;
+    z-index: 200;
+  }
+  .mobile-backdrop {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.35);
+    z-index: 99;
+    transition: opacity 0.3s;
+  }
+}
+@media (max-width: 600px) {
+  .icecream-title {
+    font-size: clamp(24px, 14vw, 90vw);
+  }
+  .icecream-flavor {
+    font-size: clamp(16px, 7vw, 90vw);
+  }
+  .icecream-desc {
+    font-size: clamp(10px, 3vw, 95vw);
+  }
+  .icecream-box {
+    width: 18vw;
+    height: 14vw;
+    min-width: 40px;
+    min-height: 30px;
+    max-width: 60px;
+    max-height: 50px;
+  }
+  .ice-img-wrap {
+    width: 28vw;
+    height: 50vw;
+    min-width: 40px;
+    min-height: 60px;
+    max-width: 80px;
+    max-height: 120px;
+    top: -55%;
+  }
+  .big-cone {
+    width: 98vw;
+    min-width: 80px;
+    max-width: 220px;
+  }
+}
+.main-bg-wrapper {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+.main-bg-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  transition: opacity 1s ease-in;
+  pointer-events: none;
+}
+.main-bg-content {
+  position: relative;
+  z-index: 1;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
