@@ -1,70 +1,80 @@
-# Getting Started with Create React App
+# Ice Cream App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Project Overview
 
-## Available Scripts
+A visually rich, interactive React app for exploring and ordering artisan ice cream flavors. Features include:
 
-In the project directory, you can run:
+- Animated gradient backgrounds and cone transitions
+- Responsive design with a mobile hamburger menu
+- Interactive ice cream selection with dynamic UI effects
 
-### `npm start`
+## Folder Structure
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```
+public/
+  favicon.ico
+  index.html
+  logo192.png
+  logo512.png
+  manifest.json
+  robots.txt
+src/
+  App.js           # Main React component, UI logic, Framer Motion animations
+  App.css          # All styles, responsive and animation CSS
+  index.js         # React entry point
+  assets/          # Ice cream and logo images
+    BlueIce.png
+    BrownIce.png
+    GreenIce.png
+    logo.png
+    PinkIce.png
+  ...
+README.md          # This file
+package.json       # Project dependencies and scripts
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Setup and Deployment Instructions
 
-### `npm test`
+1. **Install dependencies:**
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+   ```sh
+   npm install
+   ```
 
-### `npm run build`
+2. **Start the development server:**
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+   ```sh
+   npm start
+   ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+   The app will be available at `http://localhost:3000`.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+3. **Build for production:**
 
-### `npm run eject`
+   ```sh
+   npm run build
+   ```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+   The optimized build will be in the `build/` folder.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+4. **Deploy:**
+   - You can deploy the `build/` folder to any static hosting (Vercel, Netlify, GitHub Pages, etc).
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Known Issues / Limitations
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- **Gradient background transitions:** CSS cannot animate between gradients, so a React/Framer Motion crossfade workaround is used.
+- **Big cone animation:** The cone moves and fades out before changing color, then reappears. This is handled in React state and may require tuning for custom images.
+- **Ice cream box masking:** CSS `clip-path` is used for masking the cone image. Some older browsers may not support this smoothly.
+- **Mobile menu:** Hamburger menu and backdrop are custom CSS/JS. If you add more links, you may need to adjust the mobile menu styling.
+- **Image aspect ratios:** The layout assumes all cone images have similar aspect ratios. Large differences may require CSS tweaks.
 
-## Learn More
+## Internal Documentation / Comments
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- All major React logic is commented in `App.js`.
+- Animation and responsive breakpoints are documented in `App.css`.
+- Hamburger menu logic is in `App.js` and styled in `App.css`.
+- For further customization, see comments in both files for guidance on animation, layout, and responsiveness.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+For any questions or contributions, please open an issue or PR!
